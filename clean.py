@@ -19,9 +19,16 @@ for line in file:
 		# Line located
 		# Get the first occurence of https:// then add 8 to its index because its length is 8 and we want the end
 		start = line.find("https://")+8
-		
+		# If something is wrong and we can't find https:// in the line, then continue to the next line
+		if start == -1:
+			# Skip to the next line because this one isn't it
+			continue
 		# Find where the github.com string is so we know where to actually start keeping text
 		end = line.find("github.com")
+		# If something is wrong and we can't find github.com in the line then go to the next line
+		if end == -1:
+			# Go to the next line and check again
+			continue
 		# Now make the new string which is everything up to the https:// and everything after github.com including github.com
 		newLine = line[:start]+line[end:]
 		# Add the new line to the files new contents string
